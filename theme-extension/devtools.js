@@ -1,10 +1,11 @@
-var xhr = new XMLHttpRequest(),
-	stylesheet = 'stable.css';
-
-if (/Chrome\/(\d\d)/.exec(navigator.userAgent)[1] > 46) {
-	stylesheet = 'canary.css';
+function isStable() {
+	return +/Chrome\/(\d\d)/.exec(navigator.userAgent)[1] === stableVersion
 }
 
-xhr.open("GET", "/" + stylesheet, false);
-xhr.send();
-chrome.devtools.panels.applyStyleSheet(xhr.responseText);
+const stableVersion = 62;
+const stylesheet = isStable() ? 'stable.css' : 'canary.css'
+
+fetch(`/${stylesheet}`)
+	.then(res => res.text())
+	.then(styles => chrome.devtools.panels.applyStyleSheet(styles))
+	.catch(e => console.error(e));

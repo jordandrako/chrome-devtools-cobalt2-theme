@@ -1,10 +1,17 @@
-/*************************************
- * Help/Settings Overlay
- *************************************/
+// ==========================================================================
+// Settings
+// ==========================================================================
+
+.settings-window-title {
+	color: @global-text !important;
+}
 
 .help-window-main {
 	background-color: @global-background;
 	color: @global-text !important;
+	&.widget {
+		border: none !important;
+	}
 
 	.settings-tab-container header {
 		border-bottom: 1px solid @- !important; .contrast(@global-background, 30%) !important;
@@ -42,6 +49,16 @@
 		.input-styles();
 	}
 
+	select.chrome-select {
+		box-shadow: none !important;
+		text-shadow: none !important;
+		background-image: -webkit-image-set(
+			url(Images/chromeSelect.png) 1x,
+			url(Images/chromeSelect_2x.png) 2x),
+			linear-gradient(@global-background, @global-background);
+
+	}
+
 	//disabled styles
 	fieldset:disabled label {
 		color: fade(@form-label-text, 30%) !important;
@@ -59,10 +76,10 @@
 	.help-key-cell {
 
 		.help-key {
-			color: @settings-text !important;
-		}
-		span {
-			color: @settings-delimiter !important;
+			color: @global-text !important;
+			background: @- !important; .contrast(@global-background, 5%);
+		  box-shadow: none !important;
+		  text-shadow: none !important;
 		}
 	}
 
@@ -70,28 +87,48 @@
 	/* Workspaces Dialog Box
 	****************************************************/
 
+	// Headers
+	.settings-dialog {
+		.block-header {
+			color: @global-label !important;
+		}
+	}
+
+	.settings-info-message {
+		background-color: lighten(@global-background, 5%) !important;
+		color: @global-text !important;
+	}
+
 	.settings-list-container {
-		padding: 10px !important;
 		background-color: @settings-folder-background !important;
 	}
 
 	.settings-list {
-		border: 1px solid @settings-border !important;
+		border: none !important;
+	}
+
+	.contents {
+		border: 1px solid @- !important; .contrast(@global-background, 3%);
+		padding: 10px !important;
+		border-radius: 4px !important;
+	}
+
+	// Remove the border off the first child after the input
+	.settings-list-item.add-list-item + .settings-list-item {
+		border-top: none !important;
 	}
 
 	.settings-list-item {
-		& { background-color: @- !important; .contrast(@global-background, 5%) };
-		& { border-top: 1px solid @- !important; .contrast(@tab-color-top,7%) };
-		& { border-bottom: 1px solid @- !important; .contrast(@tab-color-bottom,10%, invert) };
+		background-color: @global-background !important;
+		border-top: 1px solid @global-divider !important;
 
 		&:hover {
-			& { background-color: @- !important; .contrast(@global-background, 5%) };
-			& { border-top: 1px solid @- !important; .contrast(@tab-color-top,7%) };
-			& { border-bottom: 1px solid @- !important; .contrast(@tab-color-bottom,10%, invert) };
+			background-color: @global-background !important;
+			border-top: 1px solid @global-divider !important;
 		}
 
 		&.selected {
-			background-color: @settings-selected !important;
+			background-color: @global-background !important;
 		}
 
 		&:nth-child(1) {
@@ -121,56 +158,6 @@
 	color: @form-input-text !important;
 }
 
-
-
-
-.settings-dialog {
-	border: 1px solid @settings-border !important;
-	background-color: @settings-edit-background !important;
-	border-radius: 4px !important;
-
-	.dialog-contents {
-
-		label {
-			color: @global-text;
-		}
-
-		.header {
-			color: @settings-delimiter !important;
-		}
-
-		.block-header {
-			color: @global-accent !important;
-		}
-	}
-
-	.settings-list-container {
-		background-color: @settings-background !important;
-	}
-
-	.settings-list {
-		border-color: @settings-background !important;
-		border-radius: 2px !important;
-	}
-
-	.settings-list-item
-	.settings-list-item:hover {
-		background-color: @settings-background !important;
-		& { border-top: 1px solid @- !important; .contrast(@tab-color-top, 7%) }; /* testsasdf */
-		& { border-bottom: 1px solid @- !important; .contrast(@tab-color-bottom, 10%, invert) }; /* testsasdf */
-		color: @settings-text !important;
-	}
-
-	.add-list-item {
-		border-bottom: none !important;
-	}
-
-	.file-mappings-list .settings-list-item:first-child,
-	.excluded-folders-section .settings-list-item:first-child {
-		border-top: none !important;
-	}
-}
-
 // Make swatch size 12px again.
 .swatch {
 	width: 12px !important;
@@ -183,13 +170,19 @@
 }
 
 
-// devices list
+// Devices
+//==========================================================================
+
 .devices-list {
 	border: 1px solid @- !important; .contrast(@global-background, 5%);
 }
 
 .devices-title {
 	color: @global-accent !important;
+}
+
+input[type="text"] {
+	.input-styles();
 }
 
 .devices-list-item {
@@ -202,15 +195,12 @@
 	}
 
 	.devices-list-title {
-		opacity: 0.2 !important;
+		opacity: 0.5 !important;
+		color: @global-text !important;
 	}
 
-	&.device-list-item-show {
-
-		.devices-list-title {
-			color: @global-text !important;
-			opacity: 1 !important;
-		}
+	.devices-list-checkbox:checked + .devices-list-title {
+		opacity: 1 !important;
 	}
 }
 
@@ -225,7 +215,8 @@
 
 .devices-list-edit,
 .devices-list-remove {
-	-webkit-mask-image: url(chrome-devtools://devtools/bundled/Images/toolbarButtonGlyphs.png) !important;
+	.glyphs("Images/toolbarButtonGlyphs");
+
 	background-color: @global-accent !important;
 	background-image: none !important
 }
@@ -239,7 +230,7 @@
 }
 
 // vertical navbars
-::shadow .vertical-tab-layout {
+.vertical-tab-layout {
 	// change selected style from top border to left border
 	.tabbed-pane-header-tab {
 		padding-left: 20px !important;
@@ -255,7 +246,7 @@
 }
 
 // Settings Sidebar
-.help-window-main ::shadow {
+.help-window-main {
 	//remove bg normally for horizontal pane header
 	.tabbed-pane-header {
 		background-image: none !important;
@@ -278,7 +269,74 @@
 	}
 }
 
-// Settings -> Throttling
+.list {
+	border: 1px solid @global-divider !important;
+	border-radius: 2px !important;
+}
+
+.list-item:hover {
+	.highlight(hover);
+
+	.controls-gradient {
+		background-image: none !important;
+	}
+
+	.controls-buttons {
+		.highlight(hover);
+	}
+
+	.edit-button,
+	.remove-button {
+		.glyphs("Images/toolbarButtonGlyphs");
+
+		background-image: none !important;
+		background-color: @global-accent !important;
+	}
+
+	.edit-button {
+		-webkit-mask-position: -224px -72px !important;
+	}
+
+	.remove-button {
+		-webkit-mask-position: -128px -24px !important;
+	}
+}
+
+
+// Settings Global Styles
+button {
+	.button-styles();
+}
+
+// Edit Mode
+.editor-container {
+	background: @global-hover !important;
+}
+
+.blackbox-pattern,
+.file-system-value {
+	color: @global-text !important;
+
+	input {
+		.input-styles();
+		border: 1px solid @form-input-border;
+		background-color: @global-background !important;
+		border-radius: 2px;
+		padding: 4px;
+	}
+}
+
+.chrome-select {
+	.input-styles();
+	background-image: none !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+	padding-right: 0;
+}
+
+// Throttling
+//==========================================================================
+
 .conditions {
 	&-list {
 		border: 1px solid @- !important; .contrast(@global-background, 5%);
@@ -310,7 +368,7 @@
 
 	&-list-edit,
 	&-list-remove {
-		-webkit-mask-image: url(chrome-devtools://devtools/bundled/Images/toolbarButtonGlyphs.png) !important;
+		.glyphs("Images/toolbarButtonGlyphs.png");
 		background-color: @global-accent !important;
 		background-image: none !important
 	}
@@ -322,4 +380,97 @@
 	&-list-remove {
 		-webkit-mask-position: -128px -24px;
 	}
+
+	input[type="text"],
+	.editor-content input.error-input {
+		.input-styles()
+	}
+
+
+}
+
+// Workspaces
+//==========================================================================
+.settings-tab {
+
+	.file-system-container {
+		border-left: none !important;
+		padding: 10px !important;
+	}
+
+	.file-system-name {
+		color: @global-accent !important;
+	}
+
+	button {
+		.button-styles();
+	}
+
+
+	.file-system-list {
+		.file-system-separator {
+			background-color: @global-divider !important;
+		}
+	}
+}
+
+// ==========================================================================
+// Settings sections uses different selectors for the same styles. Hope they
+// consolidate it soon.
+// ==========================================================================
+
+// Blackbox
+//==========================================================================
+.help-window-main .header {
+	border-bottom: 1px solid @global-divider !important;
+}
+
+.blackbox-separator {
+	background-color: @global-divider !important;
+}
+
+// Conditions
+//==========================================================================
+.conditions-list-text {
+	color: @global-text !important;
+
+	input {
+		.input-styles();
+		border: 1px solid @form-input-border;
+		background-color: @global-background !important;
+		border-radius: 2px;
+		padding: 4px;
+	}
+}
+
+.list-separator,
+.conditions-list-separator {
+	background-color: @global-divider !important;
+}
+
+// Padding is different in canary (update padding setting on stable L252 in settings.less)
+.vertical-tab-layout .tabbed-pane-header-tab.selected {
+	padding-left: 19px !important;
+}
+
+// ==========================================================================
+// Dialog
+// ========================================================================== */
+
+.filtered-item-list-dialog {
+	background: @dialog-background !important;
+	box-shadow: 0 5px 15px 5px rgba(0,0,0,.6) !important;
+	border: 1px solid @dialog-border !important;
+
+	> input[type=text] {
+		background-color: @dialog-item-background !important;
+		box-shadow: inset 0 1px 5px 0 rgba(0,0,0,.3) !important;
+		color: @- !important; .contrast(@dialog-item-text, 10%);
+	}
+}
+
+// Clean up dialog border (not confident about this selector)
+.vbox.flex-auto {
+	border: none !important;
+	box-shadow: 0 5px 10px fade(#000, 40%) !important;
 }

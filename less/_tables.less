@@ -13,7 +13,7 @@
 	}
 
 	.header {
-		background-image: -webkit-linear-gradient(@tab-color-top, @tab-color-bottom);
+		background: @toolbar-main !important;
 
 		th {
 			color: @global-accent !important;
@@ -27,6 +27,7 @@
 
 	td {
 		border-left: 1px solid @- !important; .contrast(@global-background, 2.5%);
+		border-bottom: 1px solid @- !important; .contrast(@global-background, 2.5%);
 	}
 
 	.data-container {
@@ -61,6 +62,8 @@
 			}
 		}
 	}
-
 }
 
+.coverage-toolbar-container {
+	background-color: @toolbar-sub !important;
+}

@@ -1,6 +1,7 @@
-/**********************************************
-/* Network Tab (uses _tables.less for list of nodes)
-/**********************************************/
+// ==========================================================================
+// Network
+// ==========================================================================
+
 #network-container {
 	border-top: none !important;
 }
@@ -26,6 +27,10 @@
 	.network-timeline-grid .resources-divider {
 		border-right: 1px solid rgba(51,51,51,.8);
 	}
+}
+
+.overview-grid-cursor-area {
+	border-bottom: 1px solid @global-divider !important;
 }
 
 // Override animation from clicking console link -> network
@@ -106,8 +111,7 @@
 	}
 }
 
-
-#network-views .request-headers-view .parent {
+.request-headers-view .parent {
 	& { background-color: @- !important; .contrast(@global-background, 2.5%) };
 	color: @global-text !important;
 	& { border-top: 1px solid @- !important; .contrast(@global-background, 10%) };
@@ -121,17 +125,17 @@
 }
 
 .request-headers-view .outline-disclosure {
-		.header-count,
-		.header-toggle {
-			color: @global-accent !important;
-			margin-left: 4px !important;
-		}
-
-		.header-toggle:hover {
-			text-shadow: 0 0 10px @global-accent;
-		}
-
+	.header-count,
+	.header-toggle {
+		color: @global-accent !important;
+		margin-left: 4px !important;
 	}
+
+	.header-toggle:hover {
+		text-shadow: 0 0 10px @global-accent;
+	}
+
+}
 
 //subline under title of node
 .network-cell-subtitle {
@@ -166,7 +170,7 @@
 
 //footer
 .network-summary-bar {
-	background-image: -webkit-linear-gradient(@tab-color-top, @tab-color-bottom);
+	background: @toolbar-sub !important;
 	border-top: 1px solid @global-background !important;
 	color: @global-text !important;
 }
@@ -191,17 +195,11 @@
 .network-details-view-tall-header {
 	margin-top: 0 !important;
 
-	network-item-view::shadow {
+	.network-item-view {
 		.tabbed-pane-header {
 			padding-top: 0 !important;
 		}
 	}
-}
-
-// network view headers
-.network .request-headers-view .parent {
-	&:extend(#network-views .request-headers-view .parent);
-	margin-top: 1px !important;
 }
 
 // reduce space between network headers and subnav menu
@@ -209,9 +207,9 @@
 	top: -1px !important;
 }
 
-// string header label of request payload
-::shadow .object-properties-section {
-	color: @js-obj-array !important;
+// Header Labels
+.tree-outline .header-name {
+	color: @global-label !important;
 }
 
 // Override
@@ -233,6 +231,62 @@
 // ==========================================================================
 // Filmstrip (also used in network)
 // ==========================================================================
-::shadow .filmstrip-dialog-label {
+.filmstrip-dialog-label {
 	color: @global-text !important;
+}
+
+
+// ==========================================================================
+// Blocked Urls
+// ========================================================================== */
+.network-blocked-urls {
+	border-top: none !important;
+
+	// Header for blocked urls
+	.toolbar {
+		border-bottom: none !important;
+
+		.toolbar-shadow {
+			background-image: linear-gradient(@tab-color-top,@tab-color-bottom) !important;
+		}
+
+		.toolbar-text {
+			color: @global-text !important;
+		}
+	}
+
+	.blocked-url {
+		color: @global-text !important;
+
+		&:hover {
+			.highlight(hover);
+		}
+	}
+}
+
+// Waterfall Header
+.network-waterfall-header,
+.network-log-grid.data-grid .header-container {
+	border-bottom: none !important;
+	background-color: @global-toolbar !important;
+	color: @global-accent;
+
+	.sort-order-icon-container {
+		background-color: @global-toolbar !important;
+	}
+}
+
+// Network Timing Popover
+.network-timing-table tr { color: @global-text !important; }
+.network-timing-table-header td { color: @global-accent !important; }
+.network-timing-bar-title { color: @global-text !important; }
+
+// Film Strip
+.film-strip-view {
+	color: @global-text !important;
+}
+
+// HTML preview
+.request-view.html {
+	background-color: #ffffff !important;
 }
